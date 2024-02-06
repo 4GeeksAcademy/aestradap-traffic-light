@@ -5,6 +5,8 @@ import Light from "./Light";
 
 //create your first component
 const TrafficLight = () => {
+
+	
 	
 	return <>
 		<div className="container text-center">
@@ -17,17 +19,17 @@ const TrafficLight = () => {
 			<div className="container myFrame">
 				<div className="row">
 					<div className="col d-flex justify-content-center ">
-						<Light/>
+						<Light color = 'danger'/>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col d-flex justify-content-center ">
-						<Light/>
+						<Light color = 'warning' />
 					</div>
 				</div>
 				<div className="row">
 					<div className="col d-flex justify-content-center">
-						<Light/>
+						<Light color = 'success'/>
 					</div>
 				</div>
 			</div>
