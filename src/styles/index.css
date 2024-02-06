@@ -10,3 +10,24 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+.myPoste{
+    background: black;
+    height: 200px;
+    width: 100px;
+} 
+
+.myFrame{
+    background: black;
+    height: 300px;
+    border-radius: 15px;
+   
+
+} 
+
+.light{
+    background-color: red;
+    height: 70px;
+    width: 70px;
+    margin: 10px;
+    border-radius: 25px;
+}
