@@ -13,13 +13,16 @@
 .myPoste{
     background: black;
     height: 200px;
-    width: 100px;
+    width: 40px;
 } 
 
 .myFrame{
     background: black;
     height: 300px;
+    width: 150px;
     border-radius: 15px;
+    display: grid;
+    align-content: center;
    
 
 } 
@@ -29,5 +32,5 @@
     height: 70px;
     width: 70px;
     margin: 10px;
-    border-radius: 25px;
+    border-radius: 34px;
 }

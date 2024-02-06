@@ -5,33 +5,34 @@ import Light from "./Light";
 
 //create your first component
 const TrafficLight = () => {
+	
 	return <>
+		<div className="container text-center">
+			<div className="row">
+				<div className="col d-flex justify-content-center">
+					<div className="myPoste"/>
+				</div>
+			</div>
 		
-
-
-
-	<div class="container text-center">
-		<div class="row myPoste"/>
-		<div class="container myFrame">
-			<div class="row">
-				<div class="col">
-					<Light/>
+			<div className="container myFrame">
+				<div className="row">
+					<div className="col d-flex justify-content-center ">
+						<Light/>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<Light/>
+				<div className="row">
+					<div className="col d-flex justify-content-center ">
+						<Light/>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<Light/>
+				<div className="row">
+					<div className="col d-flex justify-content-center">
+						<Light/>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
 	</>
 };
-
+	
 export default TrafficLight;
