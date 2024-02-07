@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 //include images into your bundle
 
 //create your first component
-const Light = ({color,  switchLight, setSwitchLight,setSwitchLight2, setSwitchLight3}) => {
+const Light = ({color,  switchLight, setSwitchLight, setSwitchLight2, setSwitchLight3, secondGreen}) => {
 
 	
 	
@@ -29,9 +29,7 @@ const Light = ({color,  switchLight, setSwitchLight,setSwitchLight2, setSwitchLi
 	style={{ boxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none',
 		 WebkitBoxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none',
 		 MozBoxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none'}}		
-	/>
-			
-		
+	/>		
 };
 
 export default Light;
