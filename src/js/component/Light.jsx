@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 //include images into your bundle
 
 //create your first component
-const Light = ({color,  switchLight, setSwitchLight}) => {
+const Light = ({color,  switchLight, setSwitchLight,setSwitchLight2, setSwitchLight3}) => {
 
 	
 	
@@ -18,6 +18,8 @@ const Light = ({color,  switchLight, setSwitchLight}) => {
 
 	const onLightHandler = () => {
 		setSwitchLight(current => !current);
+		setSwitchLight2(false);
+		setSwitchLight3(false);
 		}
 	
 

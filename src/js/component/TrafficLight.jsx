@@ -54,6 +54,8 @@ const TrafficLight = () => {
 						<Light color = 'warning' 
 						switchLight={yellowSwitchLight} 
 						setSwitchLight = {setYellowSwitchLight}
+						setSwitchLight2 = {setRedSwitchLight}
+						setSwitchLight3 = {setGreenSwitchLight}
 						/>
 					</div>
 				</div>
@@ -62,6 +64,8 @@ const TrafficLight = () => {
 						<Light color = 'success' 
 						switchLight={greenSwitchLight} 
 						setSwitchLight={setGreenSwitchLight}
+						setSwitchLight2 = {setYellowSwitchLight}
+						setSwitchLight3 = {setRedSwitchLight}
 						/>
 					</div>
 				</div>
