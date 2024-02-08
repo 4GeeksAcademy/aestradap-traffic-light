@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect,useState } from "react";
+import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 
 //include images into your bundle
 
@@ -23,13 +24,19 @@ const Light = ({color,  switchLight, setSwitchLight, setSwitchLight2, setSwitchL
 		}
 	
 
-	return <div onClick={onLightHandler}
+	return  <div onClick={onLightHandler}
 	className={`light bg-${color} shadowIn`}
 	
 	style={{ boxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none',
 		 WebkitBoxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none',
 		 MozBoxShadow: switchLight ? `0px 0px 140px 80px ${shadowOutColor}` : 'none'}}		
-	/>		
+	>
+		{secondGreen 
+			? <ArrowLeft color="rgba(57,255,20,0.6)" size={50} />
+			: null
+		}
+	</div>
+
 };
 
 export default Light;

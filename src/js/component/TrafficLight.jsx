@@ -7,11 +7,47 @@ import Light from "./Light";
 //create your first component
 const TrafficLight = () => {
 
-	let secondGreen = false;
-
+	
+	const [ secondGreen, setSecondGreen ] = useState(false);
 	const [ redSwitchLight, setRedSwitchLight ] = useState(false);
 	const [ yellowSwitchLight, setYellowSwitchLight ] = useState(false);
 	const [ greenSwitchLight, setGreenSwitchLight ] = useState(false);
+
+	
+    let autoSwichtOn = false;
+	let autoInterval = '';
+	const autoMode = () => {
+		autoSwichtOn = !autoSwichtOn;
+		if(autoSwichtOn){
+			setRedSwitchLight(false);
+			setYellowSwitchLight(true);
+			setGreenSwitchLight(false);
+			autoInterval = setInterval(autoSwicht,6000);
+		}else {
+			clearInterval(autoInterval);
+			autoInterval = null;
+		    console.log(autoSwichtOn)
+		}
+	}
+
+	function autoSwicht() {
+		setTimeout(() => {
+			setRedSwitchLight(true);
+			setYellowSwitchLight(false);
+			setGreenSwitchLight(false);
+		  }, 2000);
+		setTimeout(() => {
+			setRedSwitchLight(false);
+			setYellowSwitchLight(false);
+			setGreenSwitchLight(true);
+		  }, 4000);
+		setTimeout(() => {
+			setRedSwitchLight(false);
+			setYellowSwitchLight(true);
+			setGreenSwitchLight(false);
+		  }, 6000);
+		 
+	  }
 
 	
 	return <>
@@ -61,6 +97,7 @@ const TrafficLight = () => {
 							setSwitchLight={setGreenSwitchLight}
 							setSwitchLight2 = {setYellowSwitchLight}
 							setSwitchLight3 = {setRedSwitchLight}
+							secondGreen = {secondGreen}
 							/>
 						</div>
 					</div>: null
@@ -68,8 +105,18 @@ const TrafficLight = () => {
 			</div>
 			<div className="row">
 				<div className="col d-flex justify-content-center p-3">
-				<button type="button" class="btn btn-dark m-3">Add-Left</button>
-				<button type="button" class="btn btn-dark m-3">Auto-Mode</button>
+				<button type="button" 
+						className="btn btn-dark m-3"
+						onClick={autoMode}
+					>
+						Auto-Mode
+				</button>
+				<button type="button" 
+					className="btn btn-dark m-3"
+					onClick={()=>{setSecondGreen(!secondGreen);} }
+				>
+					Add-Left-Light
+				</button>
 				</div>
 			</div>
 		</div>
