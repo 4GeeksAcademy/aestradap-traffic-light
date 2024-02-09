@@ -9,34 +9,40 @@ const TrafficLight = () => {
 
 	
 	const [ secondGreen, setSecondGreen ] = useState(false);
+	const [ autoSwicht, setAutoSwicht ] = useState(false);
 	const [ redSwitchLight, setRedSwitchLight ] = useState(false);
 	const [ yellowSwitchLight, setYellowSwitchLight ] = useState(false);
 	const [ greenSwitchLight, setGreenSwitchLight ] = useState(false);
 
 	
 	useEffect(()=>{
-
-	},[]);
-	
-   
-	let autoInterval = null;
-	let redTimeOut = 0;
-	let yellowTimeOut = 0;
-	let greenTimeOut = 0;
-	let autoSwicht = false;
-   
-	const autoMode = () => {
-		autoSwicht = !autoSwicht;
-		if(autoSwicht = false){
-			window.location.reload(false);
-			// autoSwichtOff();
+		if(!autoSwicht){
+			autoSwichtOff();
 		}else{
 			setRedSwitchLight(false);
 			setYellowSwitchLight(true);
 			setGreenSwitchLight(false);
 			autoSwichtOn();
 		}
-	}
+	},[autoSwicht]);
+	
+   
+	let autoInterval = null;
+	let redTimeOut = 0;
+	let yellowTimeOut = 0;
+	let greenTimeOut = 0;
+	
+   
+	// const autoMode = () => {
+	// 	if(!autoSwicht){
+	// 		autoSwichtOff();
+	// 	}else{
+	// 		setRedSwitchLight(false);
+	// 		setYellowSwitchLight(true);
+	// 		setGreenSwitchLight(false);
+	// 		autoSwichtOn();
+	// 	}
+	// }
 
 	function autoSwichtOff () {
 		clearInterval(autoInterval);
@@ -52,8 +58,6 @@ const TrafficLight = () => {
 		setYellowSwitchLight(false);
 		setGreenSwitchLight(false);	
 	
-		
-
 	}
 
 	function autoSwichtOn () {
@@ -135,7 +139,7 @@ const TrafficLight = () => {
 				<div className="col d-flex justify-content-center p-3">
 				<button type="button" 
 						className="btn btn-dark m-3"
-						onClick={ autoMode }	
+						onClick={ () => setAutoSwicht(current => !current) }	
 					>
 						Auto-Mode
 				</button>
