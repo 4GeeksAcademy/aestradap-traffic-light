@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //include images into your bundle
 import Light from "./Light";
@@ -14,40 +14,68 @@ const TrafficLight = () => {
 	const [ greenSwitchLight, setGreenSwitchLight ] = useState(false);
 
 	
-    let autoSwichtOn = false;
-	let autoInterval = '';
+	useEffect(()=>{
+
+	},[]);
+	
+   
+	let autoInterval = null;
+	let redTimeOut = 0;
+	let yellowTimeOut = 0;
+	let greenTimeOut = 0;
+	let autoSwicht = false;
+   
 	const autoMode = () => {
-		autoSwichtOn = !autoSwichtOn;
-		if(autoSwichtOn){
+		autoSwicht = !autoSwicht;
+		if(autoSwicht = false){
+			window.location.reload(false);
+			// autoSwichtOff();
+		}else{
 			setRedSwitchLight(false);
 			setYellowSwitchLight(true);
 			setGreenSwitchLight(false);
-			autoInterval = setInterval(autoSwicht,6000);
-		}else {
-			clearInterval(autoInterval);
-			autoInterval = null;
-		    console.log(autoSwichtOn)
+			autoSwichtOn();
 		}
 	}
 
-	function autoSwicht() {
-		setTimeout(() => {
-			setRedSwitchLight(true);
-			setYellowSwitchLight(false);
-			setGreenSwitchLight(false);
-		  }, 2000);
-		setTimeout(() => {
-			setRedSwitchLight(false);
-			setYellowSwitchLight(false);
-			setGreenSwitchLight(true);
-		  }, 4000);
-		setTimeout(() => {
-			setRedSwitchLight(false);
-			setYellowSwitchLight(true);
-			setGreenSwitchLight(false);
-		  }, 6000);
-		 
-	  }
+	function autoSwichtOff () {
+		clearInterval(autoInterval);
+		autoInterval = null;
+		
+		clearTimeout(redTimeOut);
+		clearTimeout(greenTimeOut);
+		clearTimeout(yellowTimeOut);
+		redTimeOut = null;
+		greenTimeOut = null;
+		yellowTimeOut = null;
+		setRedSwitchLight(false);
+		setYellowSwitchLight(false);
+		setGreenSwitchLight(false);	
+	
+		
+
+	}
+
+	function autoSwichtOn () {
+		autoInterval = setInterval(()=>{
+			redTimeOut = setTimeout(() => {
+				setRedSwitchLight(true);
+				setYellowSwitchLight(false);
+				setGreenSwitchLight(false);
+				}, 1000);
+			greenTimeOut = setTimeout(() => {
+				setRedSwitchLight(false);
+				setYellowSwitchLight(false);
+				setGreenSwitchLight(true);
+				}, 2000);
+			yellowTimeOut = setTimeout(() => {
+				setRedSwitchLight(false);
+				setYellowSwitchLight(true);
+				setGreenSwitchLight(false);
+				}, 3000);
+		},3000);
+		
+	}
 
 	
 	return <>
@@ -107,13 +135,13 @@ const TrafficLight = () => {
 				<div className="col d-flex justify-content-center p-3">
 				<button type="button" 
 						className="btn btn-dark m-3"
-						onClick={autoMode}
+						onClick={ autoMode }	
 					>
 						Auto-Mode
 				</button>
 				<button type="button" 
 					className="btn btn-dark m-3"
-					onClick={()=>{setSecondGreen(!secondGreen);} }
+					onClick={ () => setSecondGreen(!secondGreen) }
 				>
 					Add-Left-Light
 				</button>
