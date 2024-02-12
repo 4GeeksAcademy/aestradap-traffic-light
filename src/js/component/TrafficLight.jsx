@@ -1,87 +1,63 @@
 import React from "react";
-import { useEffect, useState } from "react";
-
-//include images into your bundle
+import { useState } from "react";
 import Light from "./Light";
+import { DigitNumber } from "./DigitNumber";
 
-//create your first component
 const TrafficLight = () => {
 
-	
 	const [ secondGreen, setSecondGreen ] = useState(false);
-	const [ autoSwicht, setAutoSwicht ] = useState(false);
 	const [ redSwitchLight, setRedSwitchLight ] = useState(false);
 	const [ yellowSwitchLight, setYellowSwitchLight ] = useState(false);
 	const [ greenSwitchLight, setGreenSwitchLight ] = useState(false);
 
 	
-	useEffect(()=>{
-		if(!autoSwicht){
-			autoSwichtOff();
-		}else{
-			setRedSwitchLight(false);
-			setYellowSwitchLight(true);
-			setGreenSwitchLight(false);
-			autoSwichtOn();
-		}
-	},[autoSwicht]);
-	
-   
-	let autoInterval = null;
+	const [ intervalId, setIntervalId ] = useState(0);
+	const [ autoBtn, setAutoBtn ] = useState(false);
+
 	let redTimeOut = 0;
 	let yellowTimeOut = 0;
 	let greenTimeOut = 0;
 	
-   
-	// const autoMode = () => {
-	// 	if(!autoSwicht){
-	// 		autoSwichtOff();
-	// 	}else{
-	// 		setRedSwitchLight(false);
-	// 		setYellowSwitchLight(true);
-	// 		setGreenSwitchLight(false);
-	// 		autoSwichtOn();
-	// 	}
-	// }
+	const startAutoModeHandler = () => {
 
-	function autoSwichtOff () {
-		clearInterval(autoInterval);
-		autoInterval = null;
-		
-		clearTimeout(redTimeOut);
-		clearTimeout(greenTimeOut);
-		clearTimeout(yellowTimeOut);
-		redTimeOut = null;
-		greenTimeOut = null;
-		yellowTimeOut = null;
-		setRedSwitchLight(false);
-		setYellowSwitchLight(false);
-		setGreenSwitchLight(false);	
-	
-	}
-
-	function autoSwichtOn () {
-		autoInterval = setInterval(()=>{
+		let newIntervalId = setInterval(()=>{
 			redTimeOut = setTimeout(() => {
 				setRedSwitchLight(true);
 				setYellowSwitchLight(false);
 				setGreenSwitchLight(false);
-				}, 1000);
+				}, 2000);
 			greenTimeOut = setTimeout(() => {
 				setRedSwitchLight(false);
 				setYellowSwitchLight(false);
 				setGreenSwitchLight(true);
-				}, 2000);
+				}, 4000);
 			yellowTimeOut = setTimeout(() => {
 				setRedSwitchLight(false);
 				setYellowSwitchLight(true);
 				setGreenSwitchLight(false);
-				}, 3000);
-		},3000);
+				}, 6000);
+		},6000);
+	  
+		setIntervalId(newIntervalId);
+	};
 		
-	}
+	const stopAutoModeHandler = () => {
+		
+		clearInterval(intervalId);
+		clearTimeout(redTimeOut);
+		clearTimeout(greenTimeOut);
+		clearTimeout(yellowTimeOut);
 
-	
+		redTimeOut = null;
+		greenTimeOut = null;
+		yellowTimeOut = null;
+
+		setRedSwitchLight(false);
+		setYellowSwitchLight(false);
+		setGreenSwitchLight(false);	
+
+	};
+		
 	return <>
 		<div className="container text-center">
 			<div className="row">
@@ -139,9 +115,17 @@ const TrafficLight = () => {
 				<div className="col d-flex justify-content-center p-3">
 				<button type="button" 
 						className="btn btn-dark m-3"
-						onClick={ () => setAutoSwicht(current => !current) }	
+						disabled={autoBtn} 
+						onClick={ () => { startAutoModeHandler(); setAutoBtn(!autoBtn)} }	
 					>
-						Auto-Mode
+						Auto-Mode-On
+				</button>
+				<button type="button" 
+						className="btn btn-dark m-3"
+						disabled={!autoBtn}
+						onClick={ () => { stopAutoModeHandler(); setAutoBtn(!autoBtn)} }	
+					>
+						Auto-Mode-Off
 				</button>
 				<button type="button" 
 					className="btn btn-dark m-3"
@@ -151,6 +135,14 @@ const TrafficLight = () => {
 				</button>
 				</div>
 			</div>
+			{
+				autoBtn && 
+				<div className="row">
+					<div className="col d-flex justify-content-center p-3">
+						<DigitNumber autoBtn={autoBtn} />
+					</div>
+				</div>
+			}
 		</div>
 	</>
 };
